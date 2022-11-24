@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+
+{% block title %}
+    <title>Edit Task - Taskmate</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <br>
+        {% if task_obj.manage == request.user %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                <input type="text" class="form-control" value="{{task_obj.task}}" placeholder="{{task.obj.task}}" name="task" >
+                <input type="hidden" value="{{task_obj.done}}" name="done" >
+
+                </div>
+                <button type="submit" class="btn btn-primary">Update Task</button>
+            </form>
+        {% else %}
+            <p>Access Denied, You are not allow to perform this task.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
